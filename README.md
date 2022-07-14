@@ -19,5 +19,16 @@
 #### A transaction can view and modify the state. It costs gas. It usually interacts with smart contract on the blochchain. Transaction in Cadence usually has two phases: prepare and execute.
 #### In Cadence script, contracts and transactions are written separately.
 
-# CHAPTER 2 DAY 1
-# THESE ARE MY ANSWERS FOR CHAPTER 2 DAY 1
+# CHAPTER 1 DAY 2
+## THESE ARE MY ANSWERS FOR CHAPTER 1 DAY 2
+
+### What are the 5 Cadence Programming Language Pillars?
+
+#### 1. Safety and Security: Cadence language is very secure. It has strong type system, separation between contracts and transactions, and Resource Oriented Programming.
+#### 2. Clarity: Cadence code is easy to read and easy to verify that it's bug free and secure.
+#### 3. Approachability: Cadence syntax is similar to other programming lanugages making it easy to use by programmers.
+#### 4. Developer Experience: Un case of an error in the code, Candence gives very clear error messages that are easy to follow.
+#### 5. Resource Oriented Programming. It is probably the most important feature of Cadence.
+
+### In your opinion, even without knowing anything about the Blockchain or coding, why could the 5 Pillars be useful?
+Yes, absolutely. They sound like perfect guidelines for creating a beautiful code. And if I ever decide to write my own programming language, I will for sure take the pillars into consideration.
