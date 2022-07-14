@@ -79,3 +79,68 @@ pub fun main(): String {
 
 ![Screenshot from 2022-07-14 22-19-25](https://user-images.githubusercontent.com/109131706/179078612-4aaffa80-876f-4660-8424-4ce312866948.png)
 
+# CHAPTER 2 DAY 2
+## THESE ARE MY ANSWERS FOR CHAPTER 2 DAY 2
+
+#### Explain why we wouldn't call changeGreeting in a script.
+changeGreetings function is changing the state variable ```greeting``` thus we cannot call it from a script, only from a transation. A script views the state only. It cannot modify the state. 
+
+#### What does the ```AuthAccount``` mean in the ```prepare``` phase of the transaction?
+It is the account/person that is signing the transaction and paying for it. When a user signs a transaction, the transaction takes his ```AuthAccount``` and can access the data in the user's account.
+
+#### What is the difference between the ```prepare``` phase and the ```execute``` phase in the transaction?
+The purpose of the ```prepare``` phase is to access the information/data in the user's account. The ```execute``` phase can't do that. It can call functions and do stuff to change the data on the blockchain. It is important to notice, that we actually don't need the ```execute``` phase. Technically, all can be done in the ```prepare``` phase. This way however, the code wouldn't be clear.
+
+#### Add two new things inside your contract:
+A variable named ```myNumber``` that has type ```Int``` (set it to 0 when the contract is deployed)
+A function named ```updateMyNumber``` that takes in a new number named ```newNumber``` as a parameter that has type ```Int``` and updates ```myNumber``` to be ```newNumber```
+
+```
+// Contract
+pub contract HelloWorld {
+
+    pub var greeting: String
+    pub var myNumber: Int
+
+    pub fun changeGreeting(newGreeting: String) {
+        self.greeting = newGreeting
+    }
+
+    pub fun updateMyNumber(newNumber: Int) {
+        self.myNumber = newNumber
+    }
+
+    init() {
+        self.greeting = "Hello, World!"
+        self.myNumber = 0
+    }
+}
+
+```
+#### Add a script that reads ```myNumber``` from the contract
+```
+// New script
+import HelloWorld from 0x01
+
+pub fun main(): Int {
+    return HelloWorld.myNumber
+}
+```
+
+#### Add a transaction that takes in a parameter named ```myNewNumber``` and passes it into the ```updateMyNumber``` function. Verify that your number changed by running the script again.
+
+```
+// New transaction
+import HelloWorld from 0x01
+
+transaction(myNewNumber: Int) {
+
+  prepare(signer: AuthAccount) {}
+
+  execute {
+    HelloWorld.updateMyNumber(newNumber: myNewNumber)
+  }
+}
+```
+
+![Screenshot from 2022-07-15 00-07-25](https://user-images.githubusercontent.com/109131706/179097062-449600d0-e574-491f-afdc-71f12f8103d0.png)
