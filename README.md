@@ -180,9 +180,11 @@ pub fun main(){
         Because we didn't use the unwrap operator (1st possibility)
         or we didn't declare the return value of the function as optional (2nd possibility)
 ##### - How to fix it</br>
-        Use the unwrap operator ! after thing[0x03]  (1st possibility)
-        or declare the return value of the function as String? (2nd possibility)
+        - Use the unwrap operator ! after thing[0x03]  (1st possibility)
+        - declare the return value of the function as String? (2nd possibility)
+        - or use ?? panic() (3rd possibility)
 ```
+// 1st possibility
 pub fun main(): String {
 
     let thing: {Address: String} = {0x01: "one", 0x02: "two", 0x03: "three"}
@@ -191,12 +193,24 @@ pub fun main(): String {
 ```
 or
 ```
+// 2nd possibility
 pub fun main(): String? {
 
     let thing: {Address: String} = {0x01: "one", 0x02: "two", 0x03: "three"}
     return thing[0x03]
 }
 ```     
+or
+```
+// 3rd possibility
+pub fun main(): String {
+
+    let thing: {Address: String} = {0x01: "one", 0x02: "two", 0x03: "three"}
+    return thing[0x03] ?? panic("It looks like there is nothing to return")
+}
+```  
+
+
 
 ![Screenshot from Jacob](https://github.com/emerald-dao/beginner-cadence-course/blob/main/chapter2.0/images/wrongcode.png)
 
