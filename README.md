@@ -341,3 +341,55 @@ pub contract Test {
 ## THESE ARE MY ANSWERS FOR CHAPTER 3 DAY 2
 
 #### 1. Write your own smart contract that contains two state variables: an array of resources, and a dictionary of resources. Add functions to remove and add to each of them. They must be different from the examples above.
+
+```
+pub contract Treasure {
+
+    pub var arrayOfGems: @[Gem]
+    pub var dictionaryOfGems: @{String: Gem}
+
+    pub resource Gem {
+        pub let gemName: String
+        pub let gemOrigin: String
+        pub let possibleToBuy: Bool
+        pub let gemValue: UInt32
+
+        init(_gemName: String, _gemOrigin: String, _possibleToBuy: Bool, _gemValue: UInt32) {
+            self.gemName = _gemName
+            self.gemOrigin = _gemOrigin
+            self.possibleToBuy = _possibleToBuy
+            self.gemValue = _gemValue
+        }
+    }
+
+    pub fun createGem (gemName: String, gemOrigin: String, possibleToBuy: Bool, gemValue: UInt32): @Gem {
+        var newGem: @Gem <- create Gem(_gemName: gemName, _gemOrigin: gemOrigin, _possibleToBuy: possibleToBuy, _gemValue: gemValue)
+        return <- newGem
+    }
+
+    pub fun addGemToArr(gem: @Gem) {
+        self.arrayOfGems.append(<- gem)
+    }
+
+    pub fun removeGemFromArr(index: Int): @Gem {
+        return <- self.arrayOfGems.remove(at: index)
+    }
+
+    pub fun addGemToDict(gem: @Gem) {
+        let key = gem.gemName
+        let oldGem <- self.dictionaryOfGems[key] <- gem
+        destroy oldGem
+    }
+
+    pub fun removeGemFromDict(key: String): @Gem {
+        let gem <- self.dictionaryOfGems.remove(key: key) ?? panic("Could not find the gem!")
+        return <- gem
+    }
+
+    init() {
+        self.arrayOfGems <- []
+        self.dictionaryOfGems <- {}
+    }
+
+}
+```
