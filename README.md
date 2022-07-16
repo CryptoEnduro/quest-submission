@@ -297,21 +297,28 @@ pub fun main() {
 ## THESE ARE MY ANSWERS FOR CHAPTER 3 DAY 1
 
 #### 1. In words, list 3 reasons why structs are different from resources.
+1. Structs are less secure than resources and it is much easier to deal with them. For example, structs can be copied, resources cannot.
+2. Structs can be lost, forgotten or overwritten. Resources cannot. You always need to keep track of resources.
+3. Structs and resources use diffrent operators that have different meanings. Structs use ```=``` as an assignment operator, resources on the other hand, use ```<-``` to move them around. You also have to use a ```@``` symbol in front of a resource's type. 
 
 #### 2. Describe a situation where a resource might be better to use than a struct.
+It is better to use resources than structures when we deal with some unique and precious data, like for example NFTs. We want to make sure each NTF is unique, has a distinct ```uuid```  and cannot be copied. We do not want for example that someone fakes our Emerald Academy diploma. 
 
 #### 3. What is the keyword to make a new resource?
+The keyword is ```create```.
 
 #### 4. Can a resource be created in a script or transaction (assuming there isn't a public function to create one)?
+No, it cannot.
 
 #### 5. What is the type of the resource below?
+Hmm, I would say this is not a resource. This is only a declaration of a public resource. A resource must be explicitly created with the keyword ```create```.
 ```
 pub resource Jacob {
 
 }
 ```
 #### 6. Let's play the "I Spy" game from when we were kids. I Spy 4 things wrong with this code. Please fix them.
-
+Here is the fixed code with some comments
 ```
 pub contract Test {
 
@@ -323,9 +330,9 @@ pub contract Test {
         }
     }
 
-    pub fun createJacob(): Jacob { // there is 1 here
-        let myJacob = Jacob() // there are 2 here
-        return myJacob // there is 1 here
+    pub fun createJacob(): @Jacob { // add @ in front of Jacob
+        let myJacob <- create Jacob() // replace = with <-, add the keyword create
+        return <- myJacob // add the move operator <-
     }
 }
 ```
