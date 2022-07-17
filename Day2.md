@@ -135,7 +135,7 @@ pub fun main(){
 
 #### 3. Explain what the force unwrap operator ! does, with an example different from the one I showed you (you can just change the type).
 
-- force unwrap operator causes ```Panic``` if the value is ```nil```, or assigns the value to a variable with a specific type (e.g. String) that should not be optional any more.
+- force unwrap operator causes ```Panic``` if the value is ```nil```, or assigns the value to a variable with a specific type (e.g. String) that should not be optional any more. The force-unwrap operator also returns the value inside of an optional, and if there is a nil value, it then panics and aborts the program.
 
 
 #### 4. Using this picture below, explain...
