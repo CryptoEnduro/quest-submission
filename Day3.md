@@ -13,10 +13,11 @@ It is better to use resources than structures when we deal with some unique and 
 The keyword is ```create```.
 
 #### 4. Can a resource be created in a script or transaction (assuming there isn't a public function to create one)?
-No, it cannot.
+No, it cannot due to security reasons and also because creating a resource causes the modifcation of the state. A script cannot modify the state.
+The only possibility to create a resource via a transaction or a script is through a public function in the contract. 
 
 #### 5. What is the type of the resource below?
-Hmm, I would say this is not a resource. This is only a declaration of a public resource. A resource must be explicitly created with the keyword ```create```.
+This is a resource of type @Jacob
 ```
 pub resource Jacob {
 
