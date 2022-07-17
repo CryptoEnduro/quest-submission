@@ -398,8 +398,83 @@ pub contract Treasure {
 ## THESE ARE MY ANSWERS FOR CHAPTER 3 DAY 3
 
 #### 1. Define your own contract that stores a dictionary of resources. Add a function to get a reference to one of the resources in the dictionary.
+```
+pub contract CryptoGems {
+
+    pub var dictionaryOfGems: @{String: Gem}
+
+    pub resource Gem {
+        pub let name: String
+        pub(set) var value: UInt32
+
+        init(_name: String, _value: UInt32) {
+            self.name = _name
+            self.value = _value
+        }
+    }
+
+    // name: String, value: UInt32
+    pub fun createGem (name: String, value: UInt32): @Gem {
+        var newGem: @Gem <- create Gem(_name: name, _value: value)
+        return <- newGem
+    }
+
+    pub fun addGemToDict(name: String, newGem: @Gem) {
+        let oldGem <- self.dictionaryOfGems[name] <- newGem
+        destroy oldGem
+    }
+
+    pub fun changeValue(newValue: UInt32, gemRef: &Gem) {
+        gemRef.value = newValue
+    }
+
+    pub fun getGemRef(name: String): &Gem? {
+        let gemRef: &Gem? = &self.dictionaryOfGems[name] as &Gem?
+        return gemRef
+    }
+  
+
+    init() {
+        self.dictionaryOfGems <- {}
+    }
+}
+```
 
 #### 2. Create a script that reads information from that resource using the reference from the function you defined in part 1.
 
+```
+import CryptoGems from 0x01
+
+pub fun main (name: String, newValue: UInt32) {
+ 
+    var gemRef: &CryptoGems.Gem? = CryptoGems.getGemRef(name: name)
+    CryptoGems.changeValue(newValue: newValue, gemRef: gemRef!)
+    log(gemRef)
+  
+}
+```
+The transaction below is not a part of the solution, but it might help testing the code
+```
+import CryptoGems from 0x01
+transaction (name: String, value: UInt32) {
+ 
+  prepare(signer: AuthAccount) {}
+
+ 
+  execute {
+
+    var gem: @CryptoGems.Gem <- CryptoGems.createGem(name: name, value: value)
+    CryptoGems.addGemToDict(name: name, newGem: <- gem)
+    log("Operation successful, ".concat(name).concat(" added"))
+  
+  }
+}
+```
+
 #### 3. Explain, in your own words, why references can be useful in Cadence.
+References in Cadence are useful for many reasons
+- Not moving resources (and other data types) around, thus keeping them safe
+- Accessing resources (and other data types) with ease and efficiently e.g., changing some properties of the resource without moving it back and forth
+- Speed, it is usually faster to access data via a reference
+- Saving gas
 
