@@ -488,6 +488,63 @@ References in Cadence are useful for many reasons
 
 #### 2. Define your own contract. Make your own resource interface and a resource that implements the interface. Create 2 functions. In the 1st function, show an example of not restricting the type of the resource and accessing its content. In the 2nd function, show an example of restricting the type of the resource and NOT being able to access its content.
 
+```
+access(all) contract UFO {
+
+    pub resource interface IAlien {
+        pub let name: String
+        pub let species: String
+
+        access(contract) fun logTopSecret(): String
+    }
+
+    pub resource Alien: IAlien {
+        pub let name: String
+        pub let age:    UInt8
+        pub let species: String
+        pub let topSecret: String
+
+        pub fun logTopSecret (): String {
+            return (self.topSecret)
+        }       
+
+        init(_name: String, _age: UInt8, _species: String, _topSecret: String) {
+            self.name = _name
+            self.age = _age
+            self.species = _species
+            self.topSecret = _topSecret
+        }
+    }
+
+    // the type of the resource is not restricted here, and the function can access its content
+    pub fun ShowRestrictedData (alien: @Alien) {
+        log(alien.age)
+        log(alien.topSecret)
+        destroy alien
+    }
+
+    // the function below will give us an error, because we have restricted the type of the resource
+    // and we are trying to access the restricted variable alien.age.
+    // Although the alien.topSecret variable is also restricted, we are able to access its value by using a resource 
+    // function that is accessible from inside the contract
+    pub fun tryToshowRestrictedData (alien: @Alien{IAlien}) {
+        log(alien.age)
+        var topSecret = alien.logTopSecret()
+        log("The top secret for ".concat(alien.name).concat(" is ").concat(topSecret))
+        destroy alien
+    }
+
+    pub fun createAlien (name: String, age: UInt8, species: String, topSecret: String): @Alien {
+        var newAlien: @Alien <- create Alien(_name: name, _age: age, _species: species, _topSecret: topSecret)
+        return <- newAlien
+    }
+
+    init() {
+        
+    }
+}
+```
+
 #### 3. How would we fix this code?
 ```
 pub contract Stuff {
