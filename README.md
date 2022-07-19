@@ -516,15 +516,15 @@ access(all) contract UFO {
         }
     }
 
-    // the type of the resource is not restricted here, and the function can access its content
+    // 1st function. The type of the resource is not restricted here, and the function can access its content
     pub fun ShowRestrictedData (alien: @Alien) {
         log(alien.age)
         log(alien.topSecret)
         destroy alien
     }
 
-    // the function below will give us an error, because we have restricted the type of the resource
-    // and we are trying to access the restricted variable alien.age.
+    // 2nd function. The function below will give us an error, because we have restricted the type of the resource
+    // and, at the same time, we are trying to access the restricted variable alien.age.
     // Although the alien.topSecret variable is also restricted, we are able to access its value by using a resource 
     // function that is accessible from inside the contract
     pub fun tryToshowRestrictedData (alien: @Alien{IAlien}) {
