@@ -546,12 +546,18 @@ access(all) contract UFO {
 ```
 
 #### 3. How would we fix this code?
+
+In order to fix the code below I implemented two changes: 
+1. I commented out the variable ```favouriteFruit```, that was defined inside the interface but not implemented inside the sturcture. Since this variable is not used in the contract, the best I could do was to get rid of it.
+2. I defined a function ```changeGreeting()``` inside the interface with the ```access(contract)``` modifier, making it possible to call the function from inside the contract.
+
 ```
 pub contract Stuff {
 
     pub struct interface ITest {
       pub var greeting: String
-      pub var favouriteFruit: String
+      // pub var favouriteFruit: String
+      access(contract) fun changeGreeting(newGreeting: String): String
     }
 
     // ERROR:
