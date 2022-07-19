@@ -608,3 +608,5 @@ This function is visible in Area 1,2 and 3.
 
 ```privateFunc```
 This function is visible in Area 1 only
+
+![Help diagram](https://github.com/emerald-dao/beginner-cadence-course/raw/main/chapter3.0/images/boxdiagram.PNG)
