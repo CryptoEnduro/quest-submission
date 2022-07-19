@@ -583,3 +583,28 @@ pub contract Stuff {
     }
 }
 ```
+# CHAPTER 3 DAY 5
+## THESE ARE MY ANSWERS FOR CHAPTER 3 DAY 5
+
+#### For today's quest, you will be looking at a contract and a script. You will be looking at 4 variables (a, b, c, d) and 3 functions (publicFunc, contractFunc, privateFunc) defined in SomeContract. In each AREA (1, 2, 3, and 4), I want you to do the following: for each variable (a, b, c, and d), tell me in which areas they can be read (read scope) and which areas they can be modified (write scope). For each function (publicFunc, contractFunc, and privateFunc), simply tell me where they can be called.
+
+```pub(set) var a: String```
+This variable can be read, written and modified in Area 1, 2, 3 and 4
+
+```pub var b: String```
+This variable can be read in Area 1, 2, 3 and 4, and it can be modified in Area 1 only.
+
+```access(contract) var c: String```
+This variable can be read in Area 1, 2 and 3, and it can be modified in Area 1 only.
+
+```access(self) var d: String```
+This variable can be read and modified in Area 1 only.
+
+```publicFunc``` 
+This function is visible in Area 1,2,3 and 4.
+
+```contractFunc``` 
+This function is visible in Area 1,2 and 3.
+
+```privateFunc```
+This function is visible in Area 1 only
