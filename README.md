@@ -483,8 +483,8 @@ References in Cadence are useful for many reasons
 
 #### 1. Explain, in your own words, the 2 things resource interfaces can be used for (we went over both in today's content)
 
-- Resource interfeces contains function and fields that a resource implementing the interface must provide implementations for. Thus it can be seen as the "resource specifications" or "requirements"
-- Resource interface can restrict access to some of the variables and functions of the resource to certain people.
+- A resource interfeces "sits" on top of a resource. It contains function and fields that a resource implementing the interface must provide implementations for. Thus it can be seen as the "resource specifications" or "requirements"
+- Resource interface can restrict access to some of the variables and functions of the resource to certain people. It can also restrict access to the whole resource.
 
 #### 2. Define your own contract. Make your own resource interface and a resource that implements the interface. Create 2 functions. In the 1st function, show an example of not restricting the type of the resource and accessing its content. In the 2nd function, show an example of restricting the type of the resource and NOT being able to access its content.
 
