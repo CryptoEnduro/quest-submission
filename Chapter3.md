@@ -295,7 +295,7 @@ pub contract Stuff {
 #### For today's quest, you will be looking at a contract and a script. You will be looking at 4 variables (a, b, c, d) and 3 functions (publicFunc, contractFunc, privateFunc) defined in SomeContract. In each AREA (1, 2, 3, and 4), I want you to do the following: for each variable (a, b, c, and d), tell me in which areas they can be read (read scope) and which areas they can be modified (write scope). For each function (publicFunc, contractFunc, and privateFunc), simply tell me where they can be called.
 
 ```pub(set) var a: String```
-This variable can be read, written and modified in Area 1, 2, 3 and 4
+This variable can be read in Area 1, 2, 3 and 4, and can be modified in Area 1, 2, 3. It cannot be modified in area 4 since a script cannot change a state variable.
 
 ```pub var b: String```
 This variable can be read in Area 1, 2, 3 and 4, and it can be modified in Area 1 only.
