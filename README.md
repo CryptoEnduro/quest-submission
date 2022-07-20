@@ -615,10 +615,21 @@ This function is visible in Area 1 only
 ## THESE ARE MY ANSWERS FOR CHAPTER 4 DAY 1
 
 #### 1. Explain what lives inside of an account.
+- A user account on the Flow blockchain holds 
+    - digital assets (e.g. currencies or NFTs)
+    - user data
+    - smart contracts
 
 #### 2. What is the difference between the /storage/, /public/, and /private/ paths?
 
+- ```/storage/``` path can only by accessed by the account owner. All of user's data lives there.
+- ```/public/``` path is available to everybody. The developer should handle the public path with special care not to let somebody steal the user's digital assets.
+- ```/private/``` - is the path available only to the account owner and the people that the account owner gives access to
+
 #### 3. What does .save() do? What does .load() do? What does .borrow() do?
+- ```.save``` saves data to the storage. It should use the actual piece od data and a /storage path as parameters
+-```.load``` takes data out from the storage and loads onto a variable
+-```borrow``` returns a reference to the date in the storage. It is a very common practice to work with data using ```.borrow``` method
 
 #### 4. Explain why we couldn't save something to our account storage inside of a script.
 
