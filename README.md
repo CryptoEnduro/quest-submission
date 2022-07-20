@@ -623,17 +623,19 @@ This function is visible in Area 1 only
 #### 2. What is the difference between the /storage/, /public/, and /private/ paths?
 
 - ```/storage/``` path can only by accessed by the account owner. All of user's data lives there.
-- ```/public/``` path is available to everybody. The coder should handle the public path with special care not to let somebody steal the user's digital assets.
+- ```/public/``` path is available to everybody. The coder should handle the public path with special care not to let somebody access sensitive data.
 - ```/private/``` - is the path available only to the account owner and the people that the account owner gives access to
 
 #### 3. What does .save() do? What does .load() do? What does .borrow() do?
 - ```.save``` saves data to the storage. It should use the actual piece od data and a /storage path as parameters
--```.load``` takes data out from the storage and loads onto a variable. The coder needs to specify the type of data and the storage path. .load returns optional type. It is rarely used in Cadence development.
--```borrow``` returns a reference to the date in the storage. It is a very common practice to work with data using ```.borrow``` method. The coder needs to specify the type of data with the & (ref sign) and the storage path
+- ```.load``` takes data out from the storage and loads onto a variable. The coder needs to specify the type of data and the storage path. .load returns optional type. It is rarely used in Cadence development.
+- ```borrow``` returns a reference to the date in the storage. It is a very common practice to work with data using ```.borrow``` method. The coder needs to specify the type of data with the & (ref sign) and the storage path
 
 #### 4. Explain why we couldn't save something to our account storage inside of a script.
+A script cannot modify the state. It can only view the state. It can return some value. It is free and does not cost gas. Saving to storage can be accomplish inside the contract or in transactions.
 
 #### 5. Explain why I couldn't save something to your account.
+My account is private and the /storage space where I can save my data is private. By default all data and objects are stored in private storage. The owner has a possibility to open up access to /storage. He/she can use capabilities to accomplish this. Since I didn't use capabilities, you can't save anything to my storage.
 
 #### 6. Define a contract that returns a resource that has at least 1 field in it. Then, write 2 transactions:
 - A transaction that first saves the resource to account storage, then loads it out of account storage, logs a field inside the resource, and destroys it.
