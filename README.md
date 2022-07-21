@@ -735,7 +735,15 @@ transaction() {
 ## THESE ARE MY ANSWERS FOR CHAPTER 4 DAY 2
 
 #### 1. What does .link() do?
+It is important to remember that someone else who has this capability cannot move or destroy the object that the capability is linked to! They can only access fields that the owner has explicitly declared in the type specification of the link method (described below).
+When we .link() the resource to the /public/ path, we restrict the reference to use that resource interface in step 1).
+The link method returns a capability that can be used to access this link.
+To create a capability, we use the AuthAccount.link method to link a new capability to an object in storage. The type contained in <> is the restricted reference type that the capability represents. The capability says that whoever borrows a reference from this capability can only have access to the fields and methods that are specified by the type in <>. The specified type has to be a subtype of the type of the object being linked to, meaning that it cannot contain any fields or functions that the linked object doesn't have.
+
 #### 2. In your own words (no code), explain how we can use resource interfaces to only expose certain things to the /public/ path.
+Resource interface can restrict access to some of the variables and functions of the resource to certain people. It can also restrict access to the whole resource.
+
+
 #### 3. Deploy a contract that contains a resource that implements a resource interface. Then, do the following:
     1. In a transaction, save the resource to storage and link it to the public with the restrictive interface.
 
