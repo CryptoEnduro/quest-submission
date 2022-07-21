@@ -637,6 +637,96 @@ A script cannot modify the state. It can only view the state. It can return some
 #### 5. Explain why I couldn't save something to your account.
 My account is private and the /storage space where I can save my data is private. By default all data and objects are stored in private storage. The owner has a possibility to open up access to /storage to others using capabilities that access the public contract methods and data. Since I didn't use capabilities, you can't save anything to my account.
 
-#### 6. Define a contract that returns a resource that has at least 1 field in it. Then, write 2 transactions:
+#### 6. Define a contract that returns a resource that has at least 1 field in it.
+```
+pub contract MyStorage {
+
+  pub resource Test {
+    pub var name: String
+    pub var count: UInt
+
+    init() {
+      self.name = "Test3"
+      self.count = 0
+    }
+  }
+
+  pub fun createTest(): @Test? {
+    return <- create Test()
+  }
+
+}
+```
+#### Then, write 2 transactions:
 - A transaction that first saves the resource to account storage, then loads it out of account storage, logs a field inside the resource, and destroys it.
+```
+import MyStorage from 0x01
+
+transaction() {
+
+  prepare(signer: AuthAccount) {
+
+    let testResource <- MyStorage.createTest()
+    signer.save(<- testResource, to: /storage/MyTestResource) 
+    // saves `testResource` to my account storage at this path:
+    // /storage/MyTestResource
+
+    let testResource2 <- signer.load<@MyStorage.Test>(from: /storage/MyTestResource)
+                     ?? panic("A `@MyStorage.Test` resource does not live here.")
+    // takes `testResource` out of my account storage
+
+    // log the 'name' field of the resource
+    log(testResource2.name)
+
+    // destroy resource
+    destroy testResource2
+
+  }
+
+  execute {
+
+  }
+}
+
+```
+
 - A transaction that first saves the resource to account storage, then borrows a reference to it, and logs a field inside the resource.
+import MyStorage from 0x01
+
+
+```
+transaction() {
+
+  // I added some extra logic to the code for a test purpose.
+  prepare(signer: AuthAccount) {
+
+    // get the reference of the resource. It is possible that there is no resource in the storage. Let's see...
+    var testResource1: &MyStorage.Test? = signer.borrow<&MyStorage.Test>(from: /storage/MyTestResource)
+    
+    // if there is no resource of type MyStorage.Test saved at '/storage/MyTestResource'
+    if testResource1 == nil {
+
+      // create resource
+      let testResource <- MyStorage.createTest()
+
+      // get the reference of the newly created resource
+      signer.save(<- testResource, to: /storage/MyTestResource) 
+      let testResource2 = signer.borrow<&MyStorage.Test>(from: /storage/MyTestResource)
+                          ?? panic("A `@MyStorage.Test` resource does not live here.")
+
+      // log the field 'count' from the resource
+      log(testResource2.count)
+      log("The resource didn't exist before. We have just created it")
+
+    } else {     // if there was already a resource at '/storage/MyTestResource', log the field 'name' from the resource
+
+        log(testResource1!.name)  
+        // unwraps optional and shows name
+    }
+  }
+
+  execute {
+
+  }
+}
+```
