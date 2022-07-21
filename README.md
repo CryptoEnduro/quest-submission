@@ -741,9 +741,65 @@ When we .link() the resource to the /public/ path, we can restrict access to cer
 #### 2. In your own words (no code), explain how we can use resource interfaces to only expose certain things to the /public/ path.
 While using the .link() method we can specify resoure interface after the resource reference by placing it between the brackets {}. The resource interface can restrict access to some of the variables and functions of the resource that we make publicly available. It can also restrict access to the whole resource.
 
-#### 3. Deploy a contract that contains a resource that implements a resource interface. Then, do the following:
-    1. In a transaction, save the resource to storage and link it to the public with the restrictive interface.
+#### 3. Deploy a contract that contains a resource that implements a resource interface. 
+```
+access(all) contract MyStorage {
 
+  pub resource interface ITest {
+    pub var name: String
+    access(all) fun changeName (name: String)
+  }
+  
+  pub resource Test: ITest {
+    pub var name: String
+    pub var count: UInt
+
+    access(all) fun incrementCount () {
+      self.count = self.count + 1
+    } 
+
+    access(all) fun changeName (name: String) {
+      self.name = name
+    }
+
+    init() {
+      self.name = ""
+      self.count = 0
+    }
+  }
+
+  pub fun createTest(): @Test {
+    return <- create Test()
+  }
+
+}
+```
+#### Then, do the following:
+    1. In a transaction, save the resource to storage and link it to the public with the restrictive interface.
+```
+import MyStorage from 0x01
+
+transaction() {
+
+  prepare(acct: AuthAccount) {
+
+    let testResource: @MyStorage.Test <- MyStorage.createTest()
+    
+    testResource.changeName(name: "cat")
+    testResource.incrementCount()
+    
+    acct.save(<- testResource, to: /storage/MyTestResource) 
+
+    acct.link<&MyStorage.Test{MyStorage.ITest}>(/public/MyTestResource, target: /storage/MyTestResource)   
+
+  }
+  execute {
+
+  }
+}
+```
     2. Run a script that tries to access a non-exposed field in the resource interface, and see the error pop up.
 
+![Error](file:///home/cryptoenduro/Pictures/Screenshots/Screenshot%20from%202022-07-21%2021-23-03.png)
+ 
     3. Run the script and access something you CAN read from. Return it from the script.
