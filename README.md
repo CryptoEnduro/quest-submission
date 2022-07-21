@@ -794,12 +794,15 @@ transaction() {
 
   }
   execute {
-
   }
 }
 ```
     2. Run a script that tries to access a non-exposed field in the resource interface, and see the error pop up.
 
-![Error](file:///home/cryptoenduro/Pictures/Screenshots/Screenshot%20from%202022-07-21%2021-23-03.png)
- 
+ ![Screenshot from 2022-07-21 21-23-03](https://user-images.githubusercontent.com/109131706/180299752-e326fc21-018e-4b35-9dc5-4542d5dc7e33.png)
+
     3. Run the script and access something you CAN read from. Return it from the script.
+
+
+ 
+  
