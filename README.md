@@ -615,7 +615,7 @@ This function is visible in Area 1 only
 ## THESE ARE MY ANSWERS FOR CHAPTER 4 DAY 1
 
 #### 1. Explain what lives inside of an account.
-- A user account on the Flow blockchain holds 
+- Inside the user account on the Flow blockchain live following things: 
     - digital assets (e.g. currencies or NFTs)
     - user data
     - smart contracts
@@ -635,7 +635,7 @@ This function is visible in Area 1 only
 A script cannot modify the state. It can only view the state. It can return some value. It is free and does not cost gas. Saving to storage can be accomplish inside the contract or in transactions.
 
 #### 5. Explain why I couldn't save something to your account.
-My account is private and the /storage space where I can save my data is private. By default all data and objects are stored in private storage. The owner has a possibility to open up access to /storage. He/she can use capabilities to accomplish this. Since I didn't use capabilities, you can't save anything to my storage.
+My account is private and the /storage space where I can save my data is private. By default all data and objects are stored in private storage. The owner has a possibility to open up access to /storage to others using capabilities that access the public contract methods and data. Since I didn't use capabilities, you can't save anything to my account.
 
 #### 6. Define a contract that returns a resource that has at least 1 field in it. Then, write 2 transactions:
 - A transaction that first saves the resource to account storage, then loads it out of account storage, logs a field inside the resource, and destroys it.
