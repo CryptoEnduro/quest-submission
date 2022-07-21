@@ -802,7 +802,8 @@ transaction() {
  ![Screenshot from 2022-07-21 21-23-03](https://user-images.githubusercontent.com/109131706/180299752-e326fc21-018e-4b35-9dc5-4542d5dc7e33.png)
 
     3. Run the script and access something you CAN read from. Return it from the script.
-
+ 
+ ![Screenshot from 2022-07-21 21-32-04](https://user-images.githubusercontent.com/109131706/180301395-fe25568f-2944-4ddc-bb16-c86db14983ec.png)
 
  
   
