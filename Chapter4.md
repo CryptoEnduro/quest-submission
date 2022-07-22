@@ -197,14 +197,27 @@ transaction() {
 ## THESE ARE MY ANSWERS FOR CHAPTER 4 DAY 3
 
 #### 1.Why did we add a Collection to this contract? List the two main reasons.
+1. To be able to better organize our NFTs and not having to memorize a unique /storage path for each NFT that we minted
+2. To be able to mint NFTs for other people and give or sell our NFTs to them, thus making NFTs into real digital assets. 
 
 #### 2. What do you have to do if you have resources "nested" inside of another resource? ("Nested resources")
+You need to remember about declaring a 'destroy' function for the nested NFTs that manually destroys them with the 'destroy' keyword.
 
 #### 3. Brainstorm some extra things we may want to add to this contract. Think about what might be problematic with this contract and how we could fix it.
 
     Idea #1: Do we really want everyone to be able to mint an NFT? thinking.
+    No, not really unless it is for marketing or charity purposes. You might want however that a certain group od people can mint their NFTs for free, e.g. players in a play-to-earn game. 
 
     Idea #2: If we want to read information about our NFTs inside our Collection, right now we have to take it out of the Collection to do so. Is this good?
+    No, I do not think so. It wold be probably good to declare a function inside the resource that returns some important information about the NFT, e.g. current owner, current price, linked digital document or piece of art etc.
+    
+    Idea #3. It would be good to add a function 'buy' that would be working together with the minting and transferring mechanism. This way we could sell NFTs to other users.
+    
+    Idea #4. It could be a good idea to borrow an NFT to some kind of a reseller. This reseller could take our NFT to a market place and sell it for profit and we would either receive a fixed price for the NFT or a participate in a profit sharing scheme.
+    
+   Idea #5. We could add a so called reverse auction mechanism to our NFT, where the price of the NFT would be automatically updated periodically becoming cheaper and cheaper after each period, in case the NFT didn't find a buyer. The process would continue until the minimal price is reached or a buyer bought our NFT :)
+   
+  etc..
 
  
   
