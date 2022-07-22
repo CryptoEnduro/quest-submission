@@ -214,10 +214,10 @@ You need to remember about declaring a 'destroy' function for the nested NFTs th
     Idea #3. It would be good to add a function 'buy' that would be working together with the minting and transferring mechanism. This way we could sell NFTs to other users.
     
     Idea #4. It could be a good idea to borrow an NFT to some kind of a reseller. This reseller could take our NFT to a market place and sell it for profit and we would either receive a fixed price for the NFT or a participate in a profit sharing scheme.
+
+    Idea #5. We could add a so called reverse auction mechanism to our NFT, where the price of the NFT would be automatically updated periodically becoming cheaper and cheaper after each period, in case the NFT didn't find a buyer. The process would continue until the minimal price is reached or a buyer bought our NFT :)
     
-   Idea #5. We could add a so called reverse auction mechanism to our NFT, where the price of the NFT would be automatically updated periodically becoming cheaper and cheaper after each period, in case the NFT didn't find a buyer. The process would continue until the minimal price is reached or a buyer bought our NFT :)
-   
-  etc..
+    Idea #6. Maybe the most important one. It would be useful to link the NFT to a digital art piece or a digital document, so that the NFT has actually some value on the marketplace.
 
  
   
